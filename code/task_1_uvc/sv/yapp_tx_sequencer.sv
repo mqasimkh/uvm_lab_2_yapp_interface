@@ -1,4 +1,4 @@
-class yapp_tx_sequencer extends uvm_sequencer;
+class yapp_tx_sequencer extends uvm_sequencer #(yapp_packet);
 
     `uvm_component_utils(yapp_tx_sequencer)
 
