@@ -1,8 +1,8 @@
 -incdir ./sv
 -incdir ./tb
 
-./sv/tapp_pkj.sv
+./sv/yapp_pkj.sv
 ./tb/top.sv
 
-+UVM_TESTNAME=
+// +UVM_TESTNAME=base_test
 +UVM_VERBOSITY=UVM_HIGH

@@ -41,7 +41,7 @@ class yapp_packet extends uvm_sequence_item;
 
     rand int packet_delay;
 
-    constraint c-1 {
+    constraint c_1 {
         packet_delay inside {[1:20]};
         addr inside {[0:2]};
         length inside {[1:63]};
