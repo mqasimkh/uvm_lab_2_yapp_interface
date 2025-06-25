@@ -2,14 +2,4 @@
 // File created by:  xrun
 // Do not modify this file
 
-s1::(25Jun2025:15:31:15):( xrun -access +rwc -uvm -f file.f )
-s2::(25Jun2025:15:33:22):( xrun -access +rwc -uvm -f file.f )
-s3::(25Jun2025:15:33:38):( xrun -access +rwc -uvm -f file.f )
-s4::(25Jun2025:15:33:54):( xrun -access +rwc -uvm -f file.f )
-s5::(25Jun2025:15:34:45):( xrun -access +rwc -uvm -f file.f )
-s6::(25Jun2025:15:35:04):( xrun -access +rwc -uvm -f file.f )
-s7::(25Jun2025:15:49:54):( xrun -access +rwc -uvm -f file.f )
-s8::(25Jun2025:15:50:55):( xrun -access +rwc -uvm -f file.f )
-s9::(25Jun2025:15:51:21):( xrun -access +rwc -uvm -f file.f )
-s10::(25Jun2025:15:51:34):( xrun -access +rwc -uvm -f file.f )
-s11::(25Jun2025:15:53:48):( xrun -access +rwc -uvm -f file.f )
+s1::(25Jun2025:15:56:31):( xrun -access +rwc -uvm -f file.f )
