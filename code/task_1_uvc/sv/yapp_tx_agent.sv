@@ -11,7 +11,7 @@ class yapp_tx_agent extends uvm_agent;
     yapp_tx_sequencer sequencer;
     yapp_tx_monitor monitor;
     yapp_tx_driver driver;
-
+    
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
         monitor = new("monitor", this);
