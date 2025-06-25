@@ -17,5 +17,4 @@ class base_test extends uvm_test;
         uvm_top.print_topology();
     endfunction: end_of_elaboration_phase
 
-
 endclass: base_test

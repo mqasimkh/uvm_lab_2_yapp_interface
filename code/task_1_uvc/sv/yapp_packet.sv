@@ -28,7 +28,7 @@ class yapp_packet extends uvm_sequence_item;
         return return_parity;
     endfunction: calc_parity
 
-    function set_parity();
+    function void set_parity();
         if (parity_type == GOOD_PARITY)
             parity = calc_parity();
         else

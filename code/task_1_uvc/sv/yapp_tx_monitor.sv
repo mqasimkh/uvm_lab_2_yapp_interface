@@ -1,4 +1,4 @@
-class yapp_tx_monitor extends uvm_monitor #(yapp_packet);
+class yapp_tx_monitor extends uvm_monitor;
 
     `uvm_component_utils(yapp_tx_monitor)
 

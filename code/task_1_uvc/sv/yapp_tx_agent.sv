@@ -17,8 +17,8 @@ class yapp_tx_agent extends uvm_agent;
         monitor = new("monitor", this);
 
         if (is_active == UVM_ACTIVE) begin
-            sequencer = new("sequencer". this);
-            driver = new("driver".this);
+            sequencer = new("sequencer", this);
+            driver = new("driver",this);
         end
 
     endfunction: build_phase
