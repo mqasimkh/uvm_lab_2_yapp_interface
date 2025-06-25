@@ -16,7 +16,7 @@ class yapp_tx_driver extends uvm_driver #(yapp_packet);
 
     task send_to_dut(req);
         #10ns;
-        `uvm_info ("DRIVER", $sformat("Packet is \n%s", req,sprint()), UVM_LOW);
+        `uvm_info ("DRIVER", $sformatf("Packet is \n%s", req.sprint()), UVM_LOW);
     endtask: send_to_dut
 
 
