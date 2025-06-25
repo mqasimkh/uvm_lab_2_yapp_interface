@@ -9,13 +9,15 @@ class yapp_tx_driver extends uvm_driver #(yapp_packet);
     task run_phase(uvm_phase phase);
         forever begin
             seq_item_port.get_next_item(req);
-
+            send_to_dut(req);
             seq_item_port.item_done();
         end
     endtask: run_phase
 
     task send_to_dut(req);
-        `uvm_info("DRIVER", "$sformatf("Packet is \n%s", req)", UVM_LOW);
+        #10ns;
+        `uvm_info ("DRIVER", $sformat("Packet is \n%s", req,sprint()), UVM_LOW);
     endtask: send_to_dut
+
 
 endclass: yapp_tx_driver
