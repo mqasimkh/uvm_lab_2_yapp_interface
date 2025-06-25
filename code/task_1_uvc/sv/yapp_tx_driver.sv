@@ -1,5 +1,8 @@
 class yapp_tx_driver extends uvm_driver #(yapp_packet);
 
+    //yapp_packet req; 
+    //this req handle is auto created in base class.
+
     `uvm_component_utils(yapp_tx_driver)
 
     function new (string name = "yapp_tx_driver", uvm_component parent);
@@ -18,6 +21,5 @@ class yapp_tx_driver extends uvm_driver #(yapp_packet);
         #10ns;
         `uvm_info ("DRIVER", $sformatf("Packet is \n%s", req.sprint()), UVM_LOW);
     endtask: send_to_dut
-
 
 endclass: yapp_tx_driver
