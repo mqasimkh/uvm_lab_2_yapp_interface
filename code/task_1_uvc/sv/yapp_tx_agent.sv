@@ -23,6 +23,10 @@ class yapp_tx_agent extends uvm_agent;
 
     endfunction: build_phase
 
+    function void start_of_simulation_phase(uvm_phase phase);
+        `uvm_info(get_type_name(), "Running Simulation ...", UVM_HIGH);
+    endfunction: start_of_simulation_phase
+
     function void connect_phase(uvm_phase phase);
         if (is_active == UVM_ACTIVE) begin
             driver.seq_item_port.connect(sequencer.seq_item_export);

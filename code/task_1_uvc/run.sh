@@ -2,4 +2,4 @@
 
 source ~/cshrc
 
-xrun -access +rwc -uvm -f file.f
+xrun -access +rwc -uvm -f file.f +SVSEED=random

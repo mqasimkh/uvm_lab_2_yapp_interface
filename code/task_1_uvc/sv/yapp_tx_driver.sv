@@ -9,6 +9,10 @@ class yapp_tx_driver extends uvm_driver #(yapp_packet);
         super.new(name, parent);
     endfunction: new
 
+    function void start_of_simulation_phase(uvm_phase phase);
+        `uvm_info(get_type_name(), "Running Simulation ...", UVM_HIGH);
+    endfunction: start_of_simulation_phase
+
     task run_phase(uvm_phase phase);
         forever begin
             seq_item_port.get_next_item(req);

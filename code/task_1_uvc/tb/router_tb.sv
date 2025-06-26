@@ -14,4 +14,8 @@ class router_tb extends uvm_env;
         `uvm_info("UVM_ENV", "Build phase of env is being executed", UVM_HIGH);
     endfunction: build_phase
 
+    function void start_of_simulation_phase(uvm_phase phase);
+        `uvm_info(get_type_name(), "Running Simulation ...", UVM_HIGH);
+    endfunction: start_of_simulation_phase
+
 endclass: uvm_env
