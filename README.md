@@ -141,3 +141,17 @@ Also at the end, UVM Report Summary: Screenshot below:
 
 ### Running Test - 3
 
+By default `SVSEED = 1`, so passed `SVSEED=random` in command line when running test and now packet values are different.
+
+Also added start_of_simulation_phase()
+
+```systemverilog
+    function void start_of_simulation_phase(uvm_phase phase);
+        `uvm_info(get_type_name(), "Running Simulation ...", UVM_HIGH);
+    endfunction: start_of_simulation_phase
+```
+Ran the test again and this time the initialization packet data is different.
+
+Checking the UVM_INFO print messages, the tx_driver start_of_simulation method is called first, and in the `base_test` it is called last. Screenshot below: 
+
+![screenshot-4](/screenshots/4.png)
