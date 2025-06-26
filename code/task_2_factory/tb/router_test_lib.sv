@@ -34,8 +34,11 @@ class base_test extends uvm_test;
 
 endclass: base_test
 
-class short_packet_test extends base_test;
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////                Short Packet Test                    ////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
+class short_packet_test extends base_test;
     `uvm_component_utils(short_packet_test)
 
     function new (string name = "short_packet_test", uvm_component parent);
@@ -46,5 +49,22 @@ class short_packet_test extends base_test;
         set_type_override_by_type(yapp_packet::get_type(), short_yapp_packet::get_type());
         super.build_phase(phase);
     endfunction: build_phase
-
 endclass: short_packet_test
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////                Set Config Test                      ////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////
+
+class set_config_test extends base_test;
+    `uvm_component_utils(set_config_test)
+
+    function new (string name = "set_config_test", uvm_component parent);
+        super.new(name, parent);
+    endfunction
+
+    function void build_phase(uvm_phase phase);
+        uvm_config_int::set(this, "tb.uvc.agent", "is_active", UVM_PASSIVE);
+        super.build_phase(phase);
+    endfunction: build_phase
+
+endclass: set_config_test

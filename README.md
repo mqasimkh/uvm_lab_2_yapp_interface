@@ -220,3 +220,19 @@ Results as expected - now generating short_yapp_packet and topology also showing
 
 ![screenshot-7](/screenshots/7.png)
 
+### 5. Creating set_config_test
+
+In the `router_test_lib` created a new test named `set_config_test` which extends the `base_test`.
+
+Set `is_active` flag of `agent` class to `UVM_PASSIVE` which means now only monitor object will be created.
+
+```systemverilog
+uvm_config_int::set(this, "tb.uvc.agent", "is_active", UVM_PASSIVE);
+```
+Now `run_test()` passed `set_config_test` as argument to run this new config test.
+
+Results as expected - is_active is now `UVM_PASSIVE` as confirmed from topology as well, and no packets are generated because `driver` & `sequencer` are not constructed.
+
+Screenshow below:
+
+![screenshot-8](/screenshots/8.png)
