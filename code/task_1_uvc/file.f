@@ -1,7 +1,7 @@
 -incdir ./sv
 -incdir ./tb
 
-./sv/yapp_pkj.sv
+./sv/yapp_pkg.sv
 ./tb/top.sv
 
 // +UVM_TESTNAME=base_test

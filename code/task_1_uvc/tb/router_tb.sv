@@ -2,7 +2,7 @@ class router_tb extends uvm_env;
 
     `uvm_component_utils(router_tb)
 
-    yap_env uvc;
+    yapp_env uvc;
 
     function new (string name = "router_tb", uvm_component parent);
         super.new(name, parent);

@@ -1,4 +1,4 @@
-package yapp_pkj;
+package yapp_pkg;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
 
@@ -8,6 +8,6 @@ package yapp_pkj;
     `include "./sv/yapp_tx_seqs.sv"
     `include "./sv/yapp_tx_driver.sv"
     `include "./sv/yapp_tx_agent.sv"
-    `include "./sv/yap_env.sv"
+    `include "./sv/yapp_env.sv"
 
-endpackage: yapp_pkj
+endpackage: yapp_pkg
