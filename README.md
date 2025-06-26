@@ -66,3 +66,31 @@ Now if this message is printed confirms that the monitor is working and prints a
 
 ---
 
+## 3. yapp_tx_sequencer
+
+Created TX sequencer by extending from `uvm_sequencer`, parameterized with `yapp_packet`.
+
+Sequencer control the flow of packets between the sequence and the driver using the TLM interface. driver uses the sequencer's built-in TLM methods — `get_next_item` and `item_done` — via `seq_item_port` to fetch and complete transactions.
+
+Registered it with the factory using same macro as for above class. The constructor simply pass the `name` and `parent` to the base class using `super.new`.
+
+---
+
+## 4. yapp_tx_agent
+
+Next created the TX agent by extending from `uvm_agent`. Just like the other components, registered it with the factory using the built-in macros.
+
+Inside this agent, I declared handles for sequencer, monitor and driver. Agent can be either **active** or **passive**.  
+An `active agent` includes all three components: sequencer, monitor and driver, but a `passive agent` only has the monitor.
+
+To handle this, I used the `is_active` flag in the `build_phase`, which is already built-in in `uvm_agent`.
+
+If the agent is active, then I construct all three components.   
+
+If it’s passive, then only the monitor is created.
+
+In the `connect_phase`, I connected the TLM interface between the driver and the sequencer,   but only if the agent is active.
+
+This way agent can be reused in different simulation scenerios by just changing is_active.
+
+---
