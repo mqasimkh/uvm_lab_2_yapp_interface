@@ -50,3 +50,18 @@ class yapp_packet extends uvm_sequence_item;
     }
 
 endclass: yapp_packet
+
+class short_yapp_packet extends yapp_packet;
+    `uvm_object_utils(short_yapp_packet)
+
+    function new (string name = "short_yapp_packet");
+        super.new(name);
+    endfunction: new
+
+    constraint c_1 {
+        addr inside {[0:1]};
+        length inside {[1:15]};
+    }
+
+
+endclass: short_yapp_packet

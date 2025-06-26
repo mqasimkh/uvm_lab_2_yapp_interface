@@ -14,11 +14,14 @@ class yapp_tx_agent extends uvm_agent;
     
     function void build_phase(uvm_phase phase);
         super.build_phase(phase);
-        monitor = new("monitor", this);
+        //monitor = new("monitor", this);
+        monitor = yapp_tx_monitor::type_id::create("monitor", this);
 
         if (is_active == UVM_ACTIVE) begin
-            sequencer = new("sequencer", this);
-            driver = new("driver",this);
+            //sequencer = new("sequencer", this);
+            sequencer = yapp_tx_sequencer::type_id::create("sequencer", this);
+            //driver = new("driver",this);
+            driver = yapp_tx_driver::type_id::create("driver", this);
         end
 
     endfunction: build_phase
