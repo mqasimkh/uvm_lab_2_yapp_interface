@@ -7,18 +7,19 @@
 
 ## 1. yapp_tx_driver
 
-This class implements the TX driver by extending from `uvm_driver`, with `yapp_packet` as the sequence item type.  
-Note: `yapp_packet` is already defined as a `uvm_sequence_item`.
+In this class implemented the TX driver by extending from `uvm_driver`, with `yapp_packet` as the sequence item type.  `yapp_packet` is already defined as a `uvm_sequence_item`.
 
-Factory registration is done using:
+Registered in factory using:
 
 `uvm_component_utils(yapp_tx_driver)`
 
-The constructor takes `name` and `parent` as arguments and passes them to the base class:
+ Constructor takes `name` and `parent` as arguments and passes them to the base class:
 
+```systemverilog
 function new(string name = "yapp_tx_driver", uvm_component parent);  
     super.new(name, parent);  
 endfunction
+```
 
 In the run_phase, a `forever` loop is used to get a packet from the sequencer using `get_next_item`, then send it to the DUT using a helper task, and finally mark the item done using `item_done`.
 
@@ -32,10 +33,12 @@ endtask
 
 The `send_to_dut` task is used to simulate data transmission. For now, it simply prints the packet using `uvm_info`:
 
+```systemverilog
 task send_to_dut(yapp_packet req);  
     #10ns;  
     `uvm_info("DRIVER", $sformatf("Packet is \n%s", req.sprint()), UVM_LOW);  
 endtask
+```
 
 This confirms that the driver receives packets from the sequencer, simulates sending them, and prints useful debug information.
 
