@@ -27,6 +27,7 @@ endfunction
 
 In the run_phase, a `forever` loop is used to get a packet from the sequencer using `get_next_item`, then send it to the DUT using a helper task, and finally mark the item done using `item_done`.
 
+```systemverilog
 task run_phase(uvm_phase phase);  
     forever begin  
         seq_item_port.get_next_item(req);  
@@ -34,6 +35,7 @@ task run_phase(uvm_phase phase);
         seq_item_port.item_done();  
     end  
 endtask
+```
 
 The `send_to_dut` task is used to simulate data transmission. For now, it simply prints the packet using `uvm_info`:
 
@@ -54,15 +56,19 @@ I implemented the TX monitor by extending from `uvm_monitor`.  Like `driver` , `
 
 registered it with the factory using:
 
+```systemverilog
 `uvm_component_utils(yapp_tx_monitor)`
+```
 
 In the constructor, passed the `name` and `parent` arguments to the base class using `super.new`.
 
 In the `run_phase`, I simply added a `uvm_info` message to confirm monitor activity during simulation:
 
+```systemverilog
 task run_phase(uvm_phase phase);  
     `uvm_info("MONITOR", "You are in Monitor", UVM_LOW);  
 endtask
+```
 
 Now if this message is printed confirms that the monitor is working and prints a message when active in the simulation.
 
