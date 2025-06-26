@@ -152,6 +152,71 @@ Also added start_of_simulation_phase()
 ```
 Ran the test again and this time the initialization packet data is different.
 
-Checking the UVM_INFO print messages, the tx_driver start_of_simulation method is called first, and in the `base_test` it is called last. Screenshot below: 
+Checking the UVM_INFO print messages, the tx_driver start_of_simulation method is called first, and in the `base_test` it is called last. Screenshot below:
 
 ![screenshot-4](/screenshots/4.png)
+
+---
+
+## Task_2
+
+### 1. create() instead of new()
+
+Replaced factory method i.e. `create()` to construct objects instead of `new()` in build phase. Now, this allow factory overides.
+
+Re-ran the test to see if it works and gives same output as the end of task_1 and its same.
+
+### 2. Enabling Transaction Recording
+
+Next, to enable the transaction recording for all classes (driver, monitor, etc.) by adding following line in `router_test_lib.sv`
+
+```systemverilog
+uvm_config_int::set(this, "*", "recording_detail", 1);
+```
+
+`*` is a wildcard which means set `recording_detail` value = `1` everywhere inside the hierchy from where this is `set` which here is from `test`.
+
+![screenshot-5](/screenshots/5.png)
+
+### 3. Creating short_yapp_packet
+
+Created a new short_yapp_packet which extends yapp_packet with edited constraints. Added it inside the `yapp_packet.sv` file.
+
+```systemverilog
+class short_yapp_packet extends yapp_packet;
+    `uvm_object_utils(short_yapp_packet)
+
+    function new (string name = "short_yapp_packet");
+        super.new(name);
+    endfunction: new
+
+    constraint c_1 {
+        addr inside {[0:1]};
+        length inside {[1:15]};
+    }
+
+endclass: short_yapp_packet
+```
+
+### 4. Creating short_packet_test
+
+In the `router_test_lib` created a new test named `short_packet_test` which extends the `base_test`.
+
+Using factory override, using `set_type_override_by_type` method in the build phase:
+
+```systemverilog
+set_type_override_by_type(yapp_packet::get_type(), short_yapp_packet::get_type());
+```
+
+Now `run_test()` passed `short_yapp_packet` as argument to run short_yapp_packet test instead of base_test. 
+
+Results as expected - now generating short_yapp_packet and topology also showing correct hierchy. Screenshow below:
+
+`Topology`
+
+![screenshot-6](/screenshots/6.png)
+
+`Packets`
+
+![screenshot-7](/screenshots/7.png)
+
