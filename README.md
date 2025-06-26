@@ -1,4 +1,4 @@
-# UVM Transmit (TX) Agent - Lab Task
+# UVM Lab # 2: Creating YAPP Interface UVC
 
 ## Table of Contents
 - [1. yapp_tx_driver](#1-yapp_tx_driver)
