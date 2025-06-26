@@ -7,41 +7,36 @@
 
 ## 1. yapp_tx_driver
 
-In this class implemented the TX driver by extending from `uvm_driver` with the `yapp_packet` type parameter. `yapp_packet` is uvm_sequence_item already defined.
+This class implements the TX driver by extending from `uvm_driver`, with `yapp_packet` as the sequence item type.  
+Note: `yapp_packet` is already defined as a `uvm_sequence_item`.
 
-- **Factory Registration:**
+Factory registration is done using:
 
-  `uvm_component_utils(yapp_tx_driver)`
+`uvm_component_utils(yapp_tx_driver)`
 
-- **Constructor:**
+The constructor takes `name` and `parent` as arguments and passes them to the base class:
 
-  The constructor uses the standard `name` and `parent` arguments and passes them to the base class:
+function new(string name = "yapp_tx_driver", uvm_component parent);  
+    super.new(name, parent);  
+endfunction
 
-  function new(string name = "yapp_tx_driver", uvm_component parent);
-      super.new(name, parent);
-  endfunction
+In the run_phase, a `forever` loop is used to get a packet from the sequencer using `get_next_item`, then send it to the DUT using a helper task, and finally mark the item done using `item_done`.
 
-- **run_phase Task:**
+task run_phase(uvm_phase phase);  
+    forever begin  
+        seq_item_port.get_next_item(req);  
+        send_to_dut(req);  
+        seq_item_port.item_done();  
+    end  
+endtask
 
-  A `forever` loop is used to get items from the sequencer, send them to DUT, and mark them done:
+The `send_to_dut` task is used to simulate data transmission. For now, it simply prints the packet using `uvm_info`:
 
-  task run_phase(uvm_phase phase);
-      forever begin
-          seq_item_port.get_next_item(req);
-          send_to_dut(req);
-          seq_item_port.item_done();
-      end
-  endtask
+task send_to_dut(yapp_packet req);  
+    #10ns;  
+    `uvm_info("DRIVER", $sformatf("Packet is \n%s", req.sprint()), UVM_LOW);  
+endtask
 
-- **send_to_dut Task:**
-
-  A helper task to simulate sending data. Currently, it just prints the packet using `uvm_info`:
-
-  task send_to_dut(yapp_packet req);
-      #10ns;
-      `uvm_info("DRIVER", $sformatf("Packet is \n%s", req.sprint()), UVM_LOW);
-  endtask
-
-This confirms that the driver receives the packet from the sequencer and performs basic debug output.
+This confirms that the driver receives packets from the sequencer, simulates sending them, and prints useful debug information.
 
 ---
