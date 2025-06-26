@@ -10,7 +10,7 @@ class base_test extends uvm_test;
 
     function void build_phase(uvm_phase phase);
         tb = new("tb", this);
-        `uvm_info("TEST", "Build phase of env is being executed", UVM_HIGH);
+        `uvm_info(get_type_name(), "Build phase of test is being executed", UVM_HIGH);
     endfunction: build_phase
 
     function void end_of_elaboration_phase(uvm_phase phase);

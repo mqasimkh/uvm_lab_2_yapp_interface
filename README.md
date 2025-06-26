@@ -114,6 +114,7 @@ In the top module, I ran the simulation using `run_test` and passed `base_test` 
 
 The topology printed if correct as per expectation. Screenshot below:
 
+![screenshot-1](/screenshots/1.png)
 
 ---
 
