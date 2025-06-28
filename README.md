@@ -197,6 +197,33 @@ class short_yapp_packet extends yapp_packet;
 
 endclass: short_yapp_packet
 ```
+With above code there was issue. The payload array was not created. Here's why! I named the cosntraint same i.e. `c_1` which is same name of constraint in parent class.
+
+So with same name, but trying to override only 2 constraints, the rest constraints were ignored.
+
+Solution
+
+1. If going with same name, add all constraint and change the value of constraint I need to override.
+2. Give the constraint different name in child class, and then only write constraints you want to ovverride.
+
+I opted for 2. So updated `short_yapp_packet` code:
+
+```systemverilog
+class short_yapp_packet extends yapp_packet;
+    `uvm_object_utils(short_yapp_packet)
+
+    function new (string name = "short_yapp_packet");
+        super.new(name);
+    endfunction: new
+
+    constraint c_2 {
+        addr inside {[0:1]};
+        length inside {[1:15]};
+    }
+
+
+endclass: short_yapp_packet
+```
 
 ### 4. Creating short_packet_test
 
@@ -216,9 +243,13 @@ Results as expected - now generating short_yapp_packet and topology also showing
 
 ![screenshot-6](/screenshots/6.png)
 
-`Packets`
+`Packets` Before Fix (Payload Array Not Created)
 
 ![screenshot-7](/screenshots/7.png)
+
+`Packets` After Fix
+
+![screenshot-7b](/screenshots/7b.png)
 
 ### 5. Creating set_config_test
 
